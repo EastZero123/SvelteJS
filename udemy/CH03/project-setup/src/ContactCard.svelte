@@ -3,7 +3,24 @@
   export let jobTitle;
   export let description;
   export let userImage;
+
+  const initialName = userName;
 </script>
+
+<div class="contact-card">
+  <header>
+    <div class="thumb" class:thumb-placeholder={!userImage}>
+      <img src={userImage} alt={userName} />
+    </div>
+    <div class="user-data">
+      <h1>{userName} / {initialName}</h1>
+      <h2>{jobTitle}</h2>
+    </div>
+  </header>
+  <div class="description">
+    <p>{description}</p>
+  </div>
+</div>
 
 <style>
   .contact-card {
@@ -63,18 +80,3 @@
     padding: 1rem;
   }
 </style>
-
-<div class="contact-card">
-  <header>
-    <div class="thumb" class:thumb-placeholder="{!userImage}">
-      <img src={userImage} alt={userName} />
-    </div>
-    <div class="user-data">
-      <h1>{userName}</h1>
-      <h2>{jobTitle}</h2>
-    </div>
-  </header>
-  <div class="description">
-    <p>{description}</p>
-  </div>
-</div>
