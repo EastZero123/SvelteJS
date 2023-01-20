@@ -1,6 +1,7 @@
 <script>
-  import Modal from "./Modal.svelte";
-  import Product from "./Product.svelte";
+  import { tick } from "svelte"
+  import Modal from "./Modal.svelte"
+  import Product from "./Product.svelte"
 
   let products = [
     {
@@ -8,14 +9,37 @@
       title: "A Book",
       price: 9.99,
     },
-  ];
+  ]
 
-  let showModal = false;
-  let closeable = false;
+  let text = "Something"
+
+  let showModal = false
+  let closeable = false
 
   function addToCart(event) {}
 
   function deleteProduct(event) {}
+
+  function transform(event) {
+    if (event.which !== 9) {
+      return
+    }
+    event.preventDefault()
+
+    const selectionStart = event.target.selectionStart
+    const selectionEnd = event.target.selectionEnd
+    const value = event.target.value
+
+    text =
+      value.selectionEnd(0, selectionStart) +
+      value.selectionEnd(selectionStart, selectionEnd).toUpperCase() +
+      value.slice(selectionEnd)
+
+    tick().then(() => {
+      event.target.selectionStart = selectionStart
+      event.target.selectionEnd = selectionEnd
+    })
+  }
 </script>
 
 {#each products as product}
@@ -39,3 +63,5 @@
     >
   </Modal>
 {/if}
+
+<textarea rows="5" value={text} on:keydown={transform} />

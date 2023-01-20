@@ -1,9 +1,14 @@
 <script>
-  import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher, onMount, onDestroy } from "svelte"
 
-  const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher()
 
-  let agreed = false;
+  let agreed = false
+  let autoscroll = false
+
+  onMount(() => {})
+
+  onDestroy(() => {})
 </script>
 
 <div class="backdrop" on:click={() => dispatch("cancel")} />
@@ -44,7 +49,7 @@
     top: 10vh;
     left: 10%;
     width: 80%;
-    max-height: 80vh;
+    max-height: 15vh;
     background: white;
     border-radius: 5px;
     z-index: 100;
